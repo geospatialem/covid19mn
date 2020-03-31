@@ -39,7 +39,7 @@ const mnCovidData = new L.GeoJSON.AJAX("data/mnCOVID19Data.json", {
   onEachFeature: function(feature, layer) {
     layer.bindPopup("<h2>" + feature.properties.NAME + " County</h2>" + 
                     "<b>Rate per 100,000 people: " + feature.properties.PER_100K_3_26.toFixed(1) + "</b><br />" +
-                    "Beds per 100,000 people: " + feature.properties.PER_1K_BEDS_3_26.toFixed(0) + "<br />" +
+                    "Beds per 1,000 people: " + feature.properties.PER_1K_BEDS_3_26.toFixed(0) + "<br />" +
                     "Cases: " + feature.properties.CASES_3_26.toFixed(0) + "<br /><br />" +
                     "<i>Last updated: Thurs., 3/26</i>")
   }
