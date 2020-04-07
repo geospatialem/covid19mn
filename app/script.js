@@ -15,22 +15,22 @@ const EsriDarkGrayCanvasRef = L.tileLayer("https://server.arcgisonline.com/ArcGI
 
 //Rate symbology
 function setColor(popRate) {
-  return popRate > 50.2 ?    '#000' :
-         popRate > 21.4 ? '#006d2c' :
-         popRate > 10.0 ? '#31a354' :
-         popRate >  5.3 ? '#74c476' :
-         popRate >  1.5 ? '#bae4b3' :
-                          '#edf8e9';
+  return popRate > 166.5 ?    '#000' :
+         popRate >  70.3 ? '#006d2c' :
+         popRate >  36.5 ? '#31a354' :
+         popRate >  18.1 ? '#74c476' :
+         popRate >   6.0 ? '#bae4b3' :
+                           '#edf8e9';
 }
 
 //COVID-19 geometries and attributes
 const mnCovidData = new L.GeoJSON.AJAX("data/mnCOVID19Data.json", {
-  attribution: "Data: <a href='https://www.health.state.mn.us/'>Minnesota Department of Health</a> | Analysis: Matt Lindholm | Map: <a href='http://geospatialem.github.io'>Kitty Hurley</a>",
+  attribution: "Data: <a href='https://www.health.state.mn.us/'>Minnesota Department of Health</a> | Map & Analysis: <a href='http://geospatialem.github.io'>Kitty Hurley</a>",
   style: function (feature) {
     return {
       color: "#D3D3D3", //Gray outline
       weight: 1, // Weight of the outline
-      fillColor: setColor(feature.properties.PER_100K_3_26), //Set the fill to a field in your dataset
+      fillColor: setColor(feature.properties.CASES_100K), //Set the fill to a field in your dataset
       fillOpacity: 0.75, //Fill opacity
       opacity: 1, //Line opacity
       clickable: true 
@@ -38,10 +38,14 @@ const mnCovidData = new L.GeoJSON.AJAX("data/mnCOVID19Data.json", {
   },
   onEachFeature: function(feature, layer) {
     layer.bindPopup("<h2>" + feature.properties.NAME + " County</h2>" + 
-                    "<b>Rate per 100,000 people: " + feature.properties.PER_100K_3_26.toFixed(1) + "</b><br />" +
-                    "Beds per 1,000 people: " + feature.properties.PER_1K_BEDS_3_26.toFixed(0) + "<br />" +
-                    "Cases: " + feature.properties.CASES_3_26.toFixed(0) + "<br /><br />" +
-                    "<i>Last updated: Thurs., 3/26</i>")
+
+                    "<b>Rate per 100,000 people: " + feature.properties.CASES_100K.toFixed(1) + "</b><br />" +
+                    "<b>Deaths per 100,000 people: " + feature.properties.DEATHS_100K.toFixed(1) + "</b><br /><br />" +
+
+                    "Cases: " + feature.properties.CASES.toFixed(0) + "<br />" +
+                    "Deaths: " + feature.properties.DEATHS.toFixed(0) + "<br /><br />" +
+
+                    "<i>Last updated: Mon., 4/6</i>")
   }
 }).addTo(map);
 
@@ -55,9 +59,11 @@ mapLegend.onAdd = function (map) {
 };
 
 mapLegend.update = function () {
-  this._div.innerHTML = '<h4>COVID-19 in Minnesota</h4>' +
+  this._div.innerHTML = '<h4>COVID-19 in Minnesota' +
+    '<span style="display:block;font-size:0.75em">Rate per 100,000 people</span></h4>' +
     '<img src="images/legend.png" width="95" height="90" alt="">' +
-    '<p><i>Updated Thurs., 3/26</i></p>';
+
+    '<p><i>Updated Mon., 4/6</i></p>';
 };
 
 mapLegend.addTo(map);
