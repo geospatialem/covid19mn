@@ -39,7 +39,7 @@ const mnCovidData = new L.GeoJSON.AJAX("data/mnCOVID19Data.json", {
   onEachFeature: function(feature, layer) {
     layer.bindPopup("<h2>" + feature.properties.NAME + " County</h2>" + 
 
-                    "<b>Rate per 100,000 people: " + feature.properties.CASES_100K.toFixed(1) + "</b><br />" +
+                    "<b>Cases per 100,000 people: " + feature.properties.CASES_100K.toFixed(1) + "</b><br />" +
                     "<b>Deaths per 100,000 people: " + feature.properties.DEATHS_100K.toFixed(1) + "</b><br /><br />" +
 
                     "Cases: " + feature.properties.CASES.toFixed(0) + "<br />" +
@@ -60,7 +60,7 @@ mapLegend.onAdd = function (map) {
 
 mapLegend.update = function () {
   this._div.innerHTML = '<h4>COVID-19 in Minnesota' +
-    '<span style="display:block;font-size:0.75em">Rate per 100,000 people</span></h4>' +
+    '<span style="display:block;font-size:0.75em">Cases per 100,000 people</span></h4>' +
     '<img src="images/legend.png" width="95" height="90" alt="">' +
 
     '<p><i>Updated Mon., 4/6</i></p>';
