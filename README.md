@@ -2,4 +2,5 @@
 
 ## Credits
 * Data: Minnesota Department of Health
-* Map & Analysis: Kitty Hurley
+* Analysis: Matt Lindholm
+* Map: Kitty Hurley

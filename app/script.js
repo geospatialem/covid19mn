@@ -17,15 +17,19 @@ const EsriDarkGrayCanvasRef = L.tileLayer("https://server.arcgisonline.com/ArcGI
 function setColor(popRate) {
   return popRate > 171.6 ?    '#000' :
          popRate >  70.3 ? '#006d2c' :
-         popRate >  36.5 ? '#31a354' :
-         popRate >  20.0 ? '#74c476' :
-         popRate >   6.7 ? '#bae4b3' :
+         popRate >  45.0 ? '#31a354' :
+         popRate >  22.7 ? '#74c476' :
+         popRate >   7.9 ? '#bae4b3' :
                            '#edf8e9';
+}
+
+function addThousandSeparator(num) {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
 
 //COVID-19 geometries and attributes
 const mnCovidData = new L.GeoJSON.AJAX("data/mnCOVID19Data.json", {
-  attribution: "Data: <a href='https://www.health.state.mn.us/'>Minnesota Department of Health</a> | Map & Analysis: <a href='http://geospatialem.github.io'>Kitty Hurley</a>",
+  attribution: "Data: <a href='https://www.health.state.mn.us/'>Minnesota Department of Health</a> | Analysis: Matt Lindholm | Map: <a href='http://geospatialem.github.io'>Kitty Hurley</a>",
   style: function (feature) {
     return {
       color: "#D3D3D3", //Gray outline
@@ -39,13 +43,14 @@ const mnCovidData = new L.GeoJSON.AJAX("data/mnCOVID19Data.json", {
   onEachFeature: function(feature, layer) {
     layer.bindPopup("<h2>" + feature.properties.NAME + " County</h2>" + 
 
-                    "<b>Cases per 100,000 people: " + feature.properties.CASES_100K.toFixed(1) + "</b><br />" +
-                    "<b>Deaths per 100,000 people: " + feature.properties.DEATHS_100K.toFixed(1) + "</b><br /><br />" +
+                    "<b>Cases per 100,000 people: " + addThousandSeparator(feature.properties.CASES_100K.toFixed(1)) + "</b><br />" +
+                    "<b>Deaths per 100,000 people: " + addThousandSeparator(feature.properties.DEATHS_100K.toFixed(1)) + "</b><br />" +
+                    "<b>Cases per 1,000 hospital beds: " + addThousandSeparator(feature.properties.HOSPBEDS_1K.toFixed(1)) + "</b><br /><br />" +
 
                     "Cases: " + feature.properties.CASES.toFixed(0) + "<br />" +
                     "Deaths: " + feature.properties.DEATHS.toFixed(0) + "<br /><br />" +
 
-                    "<i>Last updated: Tues., 4/7</i>")
+                    "<i>Last updated: Wed., 4/8</i>")
   }
 }).addTo(map);
 
@@ -63,7 +68,7 @@ mapLegend.update = function () {
     '<span style="display:block;font-size:0.75em">Cases per 100,000 people</span></h4>' +
     '<img src="images/legend.png" width="95" height="90" alt="">' +
 
-    '<p><i>Updated Tues., 4/7</i></p>';
+    '<p><i>Updated Wed., 4/8</i></p>';
 };
 
 mapLegend.addTo(map);
