@@ -47,7 +47,8 @@ const mnCovidData = new L.GeoJSON.AJAX("data/mnCOVID19Data.json", {
                     "<b>Deaths per 100,000 people: " + addThousandSeparator(feature.properties.DEATHS_100K.toFixed(1)) + "</b><br />" +
 
                     "<br />Cases: " + feature.properties.CASES.toFixed(0) + "<br />" +
-                    "Deaths: " + feature.properties.DEATHS.toFixed(0) + "<br /><br />" +
+                    "Deaths: " + feature.properties.DEATHS.toFixed(0) + "<br />" +
+                    "Population: " + addThousandSeparator(feature.properties.POPULATION) + "<br /><br />" +
 
                     "<i>Last updated: Fri., 4/10</i>")
   }
