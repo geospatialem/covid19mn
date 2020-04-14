@@ -50,7 +50,7 @@ const mnCovidData = new L.GeoJSON.AJAX("data/mnCOVID19Data.json", {
                     "Deaths: " + feature.properties.DEATHS.toFixed(0) + "<br />" +
                     "Population: " + addThousandSeparator(feature.properties.POPULATION) + "<br /><br />" +
 
-                    "<i>Last updated: Sun., 4/12</i>")
+                    "<i>Last updated: Mon., 4/13</i>")
   }
 }).addTo(map);
 
@@ -68,7 +68,7 @@ mapLegend.update = function () {
     '<span style="display:block;font-size:0.75em">Cases per 100,000 people</span></h4>' +
     '<img src="images/legend.png" width="95" height="90" alt="">' +
 
-    '<p><i>Updated Sun., 4/12</i></p>';
+    '<p><i>Updated Mon., 4/13</i></p>';
 };
 
 mapLegend.addTo(map);
