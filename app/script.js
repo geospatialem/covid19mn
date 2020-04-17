@@ -15,11 +15,11 @@ const EsriDarkGrayCanvasRef = L.tileLayer("https://server.arcgisonline.com/ArcGI
 
 //Rate symbology
 function setColor(popRate) {
-  return popRate > 191.8 ?    '#000' :
+  return popRate > 196.9 ?    '#000' :
          popRate > 111.2 ? '#006d2c' :
-         popRate >  47.5 ? '#31a354' :
-         popRate >  22.7 ? '#74c476' :
-         popRate >   8.6 ? '#bae4b3' :
+         popRate >  67.2 ? '#31a354' :
+         popRate >  36.5 ? '#74c476' :
+         popRate >  16.0 ? '#bae4b3' :
                            '#edf8e9';
 }
 
@@ -50,7 +50,7 @@ const mnCovidData = new L.GeoJSON.AJAX("data/mnCOVID19Data.json", {
                     "Deaths: " + feature.properties.DEATHS.toFixed(0) + "<br />" +
                     "Population: " + addThousandSeparator(feature.properties.POPULATION) + "<br /><br />" +
 
-                    "<i>Last updated: Mon., 4/13</i>")
+                    "<i>Last updated: Thurs., 4/16</i>")
   }
 }).addTo(map);
 
@@ -68,7 +68,7 @@ mapLegend.update = function () {
     '<span style="display:block;font-size:0.75em">Cases per 100,000 people</span></h4>' +
     '<img src="images/legend.png" width="95" height="90" alt="">' +
 
-    '<p><i>Updated Mon., 4/13</i></p>';
+    '<p><i>Updated Thurs., 4/16</i></p>';
 };
 
 mapLegend.addTo(map);
