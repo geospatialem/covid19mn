@@ -15,19 +15,38 @@ const EsriDarkGrayCanvasRef = L.tileLayer("https://server.arcgisonline.com/ArcGI
 
 //Rate symbology
 function setColor(popRate) {
-  return popRate > 196.9 ?    '#000' :
-         popRate > 111.2 ? '#006d2c' :
-         popRate >  67.2 ? '#31a354' :
-         popRate >  36.5 ? '#74c476' :
-         popRate >  16.0 ? '#bae4b3' :
+  return popRate > 272.6 ?    '#000' :
+         popRate > 143.0 ? '#006d2c' :
+         popRate >  86.4 ? '#31a354' :
+         popRate >  47.5 ? '#74c476' :
+         popRate >  17.1 ? '#bae4b3' :
                            '#edf8e9';
 }
 
 function addThousandSeparator(num) {
-  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 }
 
-//COVID-19 geometries and attributes
+/* COVID-19 geometries and attributes */
+//   ***
+//1. Create spreadsheet from MDH website
+//   RESOURCE: https://www.health.state.mn.us/diseases/coronavirus/situation.html#map1
+//   ***
+//2. Join table with shapefile, recalculate CASES, DEATHS, CASES_100K, DEATHS_100K
+//   ***
+//3. Upload to Mapshaper as a ZIP
+//   RESOURCE: https://mapshaper.org
+//   ***
+//4. Verify field names (CASES, DEATHS, CASES_100K, DEATHS_100K)
+//   ***
+//5. Remove null values (CASES and DEATHS == 0 && CASES_100K and DEATHS100K == 0.0)
+//   ***
+//6. Confirm accuracy of GeoJSON file
+//   RESOURCE: http://geojson.io
+//   RESOURCE: http://geojsonlint.com
+//   RESOURCE: https://mapster.me/right-hand-rule-geojson-fixer 
+//   ***
+//
 const mnCovidData = new L.GeoJSON.AJAX("data/mnCOVID19Data.json", {
   attribution: "Data: <a href='https://www.health.state.mn.us/'>Minnesota Department of Health</a> | Map & Analysis: <a href='http://geospatialem.github.io'>Kitty Hurley</a>",
   style: function (feature) {
@@ -50,7 +69,7 @@ const mnCovidData = new L.GeoJSON.AJAX("data/mnCOVID19Data.json", {
                     "Deaths: " + feature.properties.DEATHS.toFixed(0) + "<br />" +
                     "Population: " + addThousandSeparator(feature.properties.POPULATION) + "<br /><br />" +
 
-                    "<i>Last updated: Thurs., 4/16</i>")
+                    "<i>Last updated: Sun., 4/19</i>")
   }
 }).addTo(map);
 
@@ -68,7 +87,7 @@ mapLegend.update = function () {
     '<span style="display:block;font-size:0.75em">Cases per 100,000 people</span></h4>' +
     '<img src="images/legend.png" width="95" height="90" alt="">' +
 
-    '<p><i>Updated Thurs., 4/16</i></p>';
+    '<p><i>Updated Sun., 4/19</i></p>';
 };
 
 mapLegend.addTo(map);
