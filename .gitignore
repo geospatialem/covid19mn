@@ -4,6 +4,9 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 .DS_Store
 
+#Shapefile
+shp*
+
 # User-specific files
 *.rsuser
 *.suo
