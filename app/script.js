@@ -7,6 +7,9 @@ function getZoomNumber() {
   }
 }
 
+//Update date
+const updateDate = "Thursday, April 23";
+
 // Initialize the map on the "map" div with a given center and zoom
 const map = L.map("covidmap").setView([46.37, -93.88], getZoomNumber());
 // Basemap Layers
@@ -15,11 +18,11 @@ const EsriDarkGrayCanvasRef = L.tileLayer("https://server.arcgisonline.com/ArcGI
 
 //Rate symbology
 function setColor(popRate) {
-  return popRate > 572.3 ?    '#000' :
-         popRate > 206.8 ? '#006d2c' :
-         popRate >  92.1 ? '#31a354' :
-         popRate >  40.8 ? '#74c476' :
-         popRate >  16.0 ? '#bae4b3' :
+  return popRate > 890.2 ?    '#000' :
+         popRate > 206.9 ? '#006d2c' :
+         popRate > 108.3 ? '#31a354' :
+         popRate >  60.4 ? '#74c476' :
+         popRate >  23.6 ? '#bae4b3' :
                            '#edf8e9';
 }
 
@@ -42,9 +45,9 @@ function addThousandSeparator(num) {
 //5. Remove null values (CASES and DEATHS == 0 && CASES_100K and DEATHS100K == 0.0)
 //   ***
 //6. Confirm accuracy of GeoJSON file
+//   RESOURCE: https://mapster.me/right-hand-rule-geojson-fixer 
 //   RESOURCE: http://geojson.io
 //   RESOURCE: http://geojsonlint.com
-//   RESOURCE: https://mapster.me/right-hand-rule-geojson-fixer 
 //   ***
 //
 const mnCovidData = new L.GeoJSON.AJAX("data/mnCOVID19Data.json", {
@@ -69,7 +72,7 @@ const mnCovidData = new L.GeoJSON.AJAX("data/mnCOVID19Data.json", {
                     "Deaths: " + feature.properties.DEATHS.toFixed(0) + "<br />" +
                     "Population: " + addThousandSeparator(feature.properties.POPULATION) + "<br /><br />" +
 
-                    "<i>Last updated: Wed., 4/22</i>")
+                    "<i>Data updated: " + updateDate + "</i>")
   }
 }).addTo(map);
 
@@ -87,7 +90,7 @@ mapLegend.update = function () {
     '<span style="display:block;font-size:0.75em">Cases per 100,000 people</span></h4>' +
     '<img src="images/legend.png" width="95" height="90" alt="">' +
 
-    '<p><i>Updated Wed., 4/22</i></p>';
+    '<p><i>Data updated: <br/>' + updateDate + '</i></p>';
 };
 
 mapLegend.addTo(map);
