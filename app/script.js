@@ -8,7 +8,7 @@ function getZoomNumber() {
 }
 
 //Update date
-const updateDate = "Saturday, April 25";
+const updateDate = "Sunday, April 26";
 
 // Initialize the map on the "map" div with a given center and zoom
 const map = L.map("covidmap").setView([46.37, -93.88], getZoomNumber());
@@ -18,10 +18,10 @@ const EsriDarkGrayCanvasRef = L.tileLayer("https://server.arcgisonline.com/ArcGI
 
 //Rate symbology
 function setColor(popRate) {
-  return popRate > 1476.0 ?    '#000' :
-         popRate > 212.0  ? '#006d2c' :
+  return popRate > 1598.6 ?    '#000' :
+         popRate > 217.0  ? '#006d2c' :
          popRate > 108.3  ? '#31a354' :
-         popRate >  53.2  ? '#74c476' :
+         popRate >  57.1  ? '#74c476' :
          popRate >  20.5  ? '#bae4b3' :
                            '#edf8e9';
 }
